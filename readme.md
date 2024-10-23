@@ -8,15 +8,13 @@
 - **Columns**: 5
 
 ### Column Details
-
- #   Column         Non-Null Count   Dtype  
----  ------         --------------   -----  
- 0   income_groups  119412 non-null  object 
- 1   age            119495 non-null  float64
- 2   gender         119811 non-null  float64
- 3   year           119516 non-null  float64
- 4   population     119378 non-null  float64
-dtypes: float64(4), object(1)
+| Column Name     | Data Type | Non-Null Count  | Unique Values | Mean         |
+|------------------|-----------|-----------------|---------------|--------------|
+| income_groups     | object    | 119412 non-null | 8             | N/A          |
+| age               | float64  | 119495 non-null | 101           | 50.007038    |
+| gender            | float64  | 119811 non-null | 3             | 1.578578     |
+| year              | float64  | 119516 non-null | 169           | 2025.068049  |
+| population        | float64  | 119378 non-null | 114925        | 111298300.0  |
 
 
 ## Identified Issues
