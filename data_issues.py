@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 #python3 data_issues.py
 
 # Relevant df info
@@ -18,16 +19,11 @@ print(f"Number of missing values: {missing_values}")
 # Validate data types
 print(df.dtypes)
 
-# Unique value counts
-unique_counts = df.nunique()
-print(f"Number of unique values: {unique_counts}")
-
-
-# Using IQR, check for outliers
+# Outliers Using IQR
 Q1 = df['population'].quantile(0.25)
 Q3 = df['population'].quantile(0.75)
 IQR = Q3 - Q1
-print(IQR)
+print(f"Number of outliers: {IQR}")
 
 # Check categorical columns
 categorical_cols = df.select_dtypes(include=['object']).columns
@@ -36,7 +32,8 @@ for col in categorical_cols:
     print(df[col].value_counts())
 
 # Check for valid values in a categorical column
-valid_categories = ['1', '2']
+print(df['gender'].head)
+valid_categories = [1,2]
 df['is_valid'] = df['gender'].isin(valid_categories)
-df['is_valid']
+print(f"valid values: {df['is_valid']}")
 
