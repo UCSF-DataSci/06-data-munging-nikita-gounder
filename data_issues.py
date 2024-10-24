@@ -23,3 +23,20 @@ unique_counts = df.nunique()
 print(f"Number of unique values: {unique_counts}")
 
 
+# Using IQR, check for outliers
+Q1 = df['population'].quantile(0.25)
+Q3 = df['population'].quantile(0.75)
+IQR = Q3 - Q1
+print(IQR)
+
+# Check categorical columns
+categorical_cols = df.select_dtypes(include=['object']).columns
+for col in categorical_cols:
+    print(f"\nUnique values in {col}:")
+    print(df[col].value_counts())
+
+# Check for valid values in a categorical column
+valid_categories = ['1', '2']
+df['is_valid'] = df['gender'].isin(valid_categories)
+df['is_valid']
+
