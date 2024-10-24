@@ -56,8 +56,8 @@
 - **Cleaning Method**: Detect missing values and drop rows with missing values
 - **Implementation**:
   ```python
-df.isna().sum()
-df_clean = df.dropna()
+  df.isna().sum()
+  df_clean = df.dropna()
   ```
 - **Justification**: Since we don't have a good measure of replacement (replacing with mean only works depending on data), dropping the rows seemed like the best solution.
 - **Impact**: 
@@ -68,8 +68,8 @@ df_clean = df.dropna()
 - **Cleaning Method**: check for and remove duplicates
 - **Implementation**:
   ```python
-df.duplicated()
-df_clean = df.drop_duplicates()
+  df.duplicated()
+  df_clean = df.drop_duplicates()
   ```
 - **Justification**: duplicates implies that the value already exists somewhere, therefore taking out unecessary duplications is the best solution
 - **Impact**: 
@@ -80,10 +80,10 @@ df_clean = df.drop_duplicates()
 - **Cleaning Method**: using IQR to find and remove outliers
 - **Implementation**:
   ```python
-Q1 = df['population'].quantile(0.25)
-Q3 = df['population'].quantile(0.75)
-IQR = Q3 - Q1
-df_clean = df[~((df['population'] < (Q1 - 1.5 * IQR)) | (df['population'] > (Q3 + 1.5 * IQR)))]
+  Q1 = df['population'].quantile(0.25)
+  Q3 = df['population'].quantile(0.75)
+  IQR = Q3 - Q1
+  df_clean = df[~((df['population'] < (Q1 - 1.5 * IQR)) | (df['population'] > (Q3 + 1.5 * IQR)))]
   ```
 - **Justification**: Identifies values above and below quartiles and removes them
 - **Impact**: 
@@ -94,9 +94,9 @@ df_clean = df[~((df['population'] < (Q1 - 1.5 * IQR)) | (df['population'] > (Q3 
 - **Cleaning Method**: Identifies values in geneder that are not categorized correctly and replaces w/ 0
 - **Implementation**:
   ```python
-valid_categories = [1.0,2.0]
-df.loc[~df['gender'].isin(valid_categories), 'gender'] = 0.0
-print(df['gender'].value_counts())
+  valid_categories = [1.0,2.0]
+  df.loc[~df['gender'].isin(valid_categories), 'gender'] = 0.0
+  print(df['gender'].value_counts())
   ```
 - **Justification**: Since we do not know what the real value is,it is best to make a new category to still represent the data
 - **Impact**: 
