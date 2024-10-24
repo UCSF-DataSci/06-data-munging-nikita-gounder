@@ -26,7 +26,7 @@
 - **Potential Impact**: Duplicates can skew analysis/results 
 
 ### Issue 2: Missing Values
-- **Description**: There are missing values in the 'population' column.
+- **Description**: There are missing values in many column.
 - **Affected Column(s)**: income_groups, age, gender, year, population       
 - **Example**: income_groups has 6306 missing values 
 - **Potential Impact**: Missing values can lead to inaccurate analysis calculations 
@@ -40,7 +40,7 @@
 ### Issue 4: Outliers
 - **Description**: Some columns have outlying values
 - **Affected Column(s)**: population
-- **Example**: 
+- **Example**: the populaton columns has many outlying values as seen by the IQR
 - **Potential Impact**: Outliers can skew data analsyis by in/de-flating values
 
 ### Issue 5: Inconcsistent Categories
@@ -52,59 +52,55 @@
 
 ## 2. Data Cleaning Process
 
-### Issue 1: [Issue Name]
-- **Cleaning Method**: [Describe your approach]
+### Issue 1: [Missing Values]
+- **Cleaning Method**: Detect missing values and drop rows with missing values
 - **Implementation**:
   ```python
-  # Include relevant code snippet
+df.isna().sum()
+df_clean = df.dropna()
   ```
-- **Justification**: [Explain why you chose this method]
+- **Justification**: Since we don't have a good measure of replacement (replacing with mean only works depending on data), dropping the rows seemed like the best solution.
 - **Impact**: 
-  - Rows affected: [Number]
-  - Data distribution change: [Describe any significant changes]
+  - Rows affected: 30978 missing values in total
+  - Data distribution change: This is a lot of missing values so a lot of the key values may change
 
-### Issue 2: [Next Issue]
-- **Cleaning Method**: [Describe your approach]
+### Issue 2: [Duplicates]
+- **Cleaning Method**: check for and remove duplicates
 - **Implementation**:
   ```python
-  # Include relevant code snippet
+df.duplicated()
+df_clean = df.drop_duplicates()
   ```
-- **Justification**: [Explain why you chose this method]
+- **Justification**: duplicates implies that the value already exists somewhere, therefore taking out unecessary duplications is the best solution
 - **Impact**: 
-  - Rows affected: [Number]
-  - Data distribution change: [Describe any significant changes]
+  - Rows affected: 2950 duplcate values in rows
+  - Data distribution change: Everything will probably decrease a bit since many excess values were removed
 
-### Issue 3: [Next Issue]
-- **Cleaning Method**: [Describe your approach]
+### Issue 3: [Outliers]
+- **Cleaning Method**: using IQR to find and remove outliers
 - **Implementation**:
   ```python
-  # Include relevant code snippet
+Q1 = df['population'].quantile(0.25)
+Q3 = df['population'].quantile(0.75)
+IQR = Q3 - Q1
+df_clean = df[~((df['population'] < (Q1 - 1.5 * IQR)) | (df['population'] > (Q3 + 1.5 * IQR)))]
   ```
-- **Justification**: [Explain why you chose this method]
+- **Justification**: Identifies values above and below quartiles and removes them
 - **Impact**: 
-  - Rows affected: [Number]
-  - Data distribution change: [Describe any significant changes]
+  - Rows affected: population column
+  - Data distribution change: More accurate representation of the population data without these outlying values
 
-### Issue 4: [Next Issue]
-- **Cleaning Method**: [Describe your approach]
+### Issue 5: [Fix Caetgorical Values]
+- **Cleaning Method**: Identifies values in geneder that are not categorized correctly and replaces w/ 0
 - **Implementation**:
   ```python
-  # Include relevant code snippet
+valid_categories = [1.0,2.0]
+df.loc[~df['gender'].isin(valid_categories), 'gender'] = 0.0
+print(df['gender'].value_counts())
   ```
-- **Justification**: [Explain why you chose this method]
+- **Justification**: Since we do not know what the real value is,it is best to make a new category to still represent the data
 - **Impact**: 
-  - Rows affected: [Number]
-  - Data distribution change: [Describe any significant changes]
-
-### Issue 5: [Next Issue]
-- **Cleaning Method**: [Describe your approach]
-- **Implementation**:
-  ```python
-  # Include relevant code snippet
-  ```
-- **Justification**: [Explain why you chose this method]
-- **Impact**: 
-  - Rows affected: [Number]
+  - Rows affected: gender column with any 3 values
   - Data distribution change: [Describe any significant changes]
 
 

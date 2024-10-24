@@ -14,16 +14,16 @@ print(f"Number of duplicate rows: {duplicates}")
 
 # Check for missing values
 missing_values = df.isnull().sum()
-print(f"Number of missing values: {missing_values}")
+print(f"Number of missing values: {sum(missing_values)}")
 
 # Validate data types
 print(df.dtypes)
 
-# Outliers Using IQR
-Q1 = df['population'].quantile(0.25)
-Q3 = df['population'].quantile(0.75)
-IQR = Q3 - Q1
-print(f"Number of outliers: {IQR}")
+# Identify outliers using Z-score
+from scipy import stats
+z_scores = np.abs(stats.zscore(df['population']))
+outliers = df[z_scores > 3]
+print(f"Number of outliers: {len(outliers)}")
 
 # Check categorical columns
 categorical_cols = df.select_dtypes(include=['object']).columns
@@ -35,5 +35,5 @@ for col in categorical_cols:
 print(df['gender'].head)
 valid_categories = [1,2]
 df['is_valid'] = df['gender'].isin(valid_categories)
-print(f"valid values: {df['is_valid']}")
+print(f"valid values: {df['is_valid']})
 
