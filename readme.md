@@ -107,15 +107,19 @@
 ## 3. Final State Analysis
 
 ### Dataset Overview
-- **Name**: cleaned_population_data.csv (or whatever you named it)
-- **Rows**: [Your answer]
-- **Columns**: [Your answer]
+- **Name**: clean_population_data.csv 
+- **Rows**: 123466 entries
+- **Columns**: 5 columns
 
 ### Column Details
-| Column Name | Data Type | Non-Null Count | #Unique Values |  Mean  |
-|-------------|-----------|----------------|----------------|--------|
-| [Column 1]  | [Type]    | [Count]        | [#Unique]      | [Mean] |
-| ...         | ...       | ...            | ...            | ...    |
+
+| Column Name     | Data Type | Non-Null Count  | Unique Values | Mean         |
+|------------------|-----------|-----------------|---------------|--------------|
+| income_groups     | object    | 117264 non-null | 8             | N/A          |
+| age               | float64  | 117366 non-null | 101           | 50.091602    |
+| gender            | float64  | 117659 non-null | 3             | 1.578332     |
+| year              | float64  | 117387 non-null | 169           | 2025.066046  |
+| population        | float64  | 117126 non-null | 112674        | 9.223757e+06  |
 
 ### Summary of Changes
 - [List major changes made to the dataset]

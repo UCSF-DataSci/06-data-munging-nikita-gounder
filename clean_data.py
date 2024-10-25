@@ -35,4 +35,8 @@ output_file = 'clean_population_data.csv'
 # Save the clean dataset
 df_clean.to_csv(output_file, index=False)
 print(f"\nClean dataset saved as '{output_file}'")
+
 print(df_clean.info())
+print(df_clean.describe())
+unique_counts = df_clean.nunique()
+print(unique_counts)
