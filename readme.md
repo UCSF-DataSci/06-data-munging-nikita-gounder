@@ -122,6 +122,6 @@
 | population        | float64  | 117126 non-null | 112674        | 9.223757e+06  |
 
 ### Summary of Changes
-- [List major changes made to the dataset]
-- [Discuss any significant changes in data distribution]
+- The cleaned dataset differs from the dirty because it is without the missing values, outliers, duplicates, and unexpected category mistakes. Some challeneges were figuring out what to do with the dirty data values. You can drop them, suplement them with the mean, replace them with an NA, or change data types. The way to overcome this is by looking at the dataset and what analysis we are trying to do with it. Based on that, we can decide how to clean the dataset.
+- There were changes in mean, total unique values, and standard deviation. Through this process I learned how to identify what is "dirty" data and the steps to take to clean it. For next steps, further cleaning in necessary and then going forward with the actual analysis. We can proceed to answer any questions we are looking at with the data.
 
